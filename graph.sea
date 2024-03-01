@@ -1,0 +1,18 @@
+# state 0 "initial graph construction"
+# state 1 "lowered graph"
+# 
+# ast:int { istr_t lit; }
+# ast:if 2 -> 1 {}
+# ast:ident { istr_t lit; }
+# 
+# ---- 2 ----
+# 
+# int { u64 value; }
+# bool { bool value; }
+
+# int  p> |n, v| { fprintf(n, "%s", sv_from(v->value)); }
+# bool p> |n, v| { fprintf(n, "%s", v->value ? "true" : "false"); }
+# int  [ ] [x] [ ] { u64 value; }
+
+int  [ ] [ ] [ ] { bool value; }
+bool [ ] [ ] [ ] { u64 value; }

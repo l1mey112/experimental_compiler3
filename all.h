@@ -157,9 +157,9 @@ static inline u32 ptrcpy(u8 *p, u8 *q, u32 len) {
 #include "def.h"
 
 enum tok_t {
-    #define X(name, _) name,
-    TOK_X_LIST
-    #undef X
+	#define X(name, _) name,
+	TOK_X_LIST
+	#undef X
 };
 
 typedef enum tok_t tok_t;
@@ -176,8 +176,8 @@ struct token_t {
 // types
 enum ti_kind {
 	#define X(name, _) name,
-    TYPE_X_CONCRETE_LIST
-    #undef X
+	TYPE_X_CONCRETE_LIST
+	#undef X
 	_TYPE_CONCRETE_MAX,
 	//
 	// TODO: change TYPE_UNKNOWN to type symbol referencing a symbol
