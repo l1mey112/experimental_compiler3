@@ -1,0 +1,70 @@
+# use ({ ... }) for putting C code in an atom
+
+# literals
+(opb 0 int ({ bool value; }) )
+(opb 0 bool ({ u64 value; }) )
+
+# mark rule as builtin
+# (ruleb int)
+
+# call builtin rule function for all of these?
+
+# (ruleb binop_chk (
+#     iadd_chk isub_chk imul_chk idiv_chk))
+
+# checked signed arithmetic
+(op 2 iadd_chk)
+(op 2 isub_chk)
+(op 2 imul_chk)
+(op 2 idiv_chk)
+
+# checked unsigned arithmetic
+(op 2 uadd_chk)
+(op 2 usub_chk)
+(op 2 umul_chk)
+(op 2 udiv_chk)
+
+# arithmetic
+(op 2 add)
+(op 2 sub)
+(op 2 mul)
+(op 2 idiv)
+(op 2 udiv)
+
+# strict IEEE floating point arithmetic
+(op 2 fadd_s)
+(op 2 fsub_s)
+(op 2 fmul_s)
+(op 2 fdiv_s)
+
+# funsafe floating point arithmetic
+(op 2 fadd)
+(op 2 fsub)
+(op 2 fmul)
+(op 2 fdiv)
+
+(op 2 shl)
+(op 2 shr)
+(op 2 sar) # arithmetic signed shift
+
+# (a + b) + c  =  a + (b + c)
+(group associative
+    (iadd_chk uadd_chk
+     imul_chk umul_chk
+     add mul
+     fadd fmul))
+
+# a + b  =  b + a
+(group commutative
+    (iadd_chk imul_chk
+     uadd_chk umul_chk
+     add mul
+     fadd_s fmul_s
+     fadd fmul))
+
+# (print int ({ fprintf(n, "%s", sv_from(v->value)); }))
+
+# binops
+# 1. commutative rules
+# 1. associative rules
+# 1. 

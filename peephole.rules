@@ -1,0 +1,28 @@
+#(rule (imul_chk _ (int && ({ v->value == 0 }) ))
+#    => (int [value 0]))
+#
+#(rule (op a b) && ({ flag:commutative(op) && flag:pos(a) < flag:pos(b) })
+#    => (op b a))
+
+# instead of matching on an unknown variable at the start, match on groups instead
+# below is not allowed because we don't know the length of the inputs
+# (var) => (something)
+
+# create a group for the binops, then match on them instead
+# ensure they're the same length
+#(group binops...)
+
+#(rule (commutative:op a b) )
+
+# (imul_chk _ (int [value 0])) => (int [value 0])
+
+# TODO: might need to support `name:(op) => name`
+#       though i don't know if we'll ever need that
+
+(mul _ zero:(int [value 0])) => zero
+(mul x (int [value 1])) => x
+
+#(imul_chk _ zero:(int [value 0])) => zero
+
+# TODO: the && to access the special data
+#(imul_chk _ zero:(int)) && zero => zero
